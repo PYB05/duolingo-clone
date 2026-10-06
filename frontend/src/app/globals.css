@@ -1,0 +1,356 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Duolingo Official Light Mode Tokens */
+    --color-snow: 255, 255, 255;              /* #FFFFFF */
+    --color-polar: 247, 247, 247;            /* #F7F7F7 */
+    --color-swan: 229, 229, 229;             /* #E5E5E5 */
+    --color-hare: 175, 175, 175;             /* #AFAFAF */
+    --color-wolf: 119, 119, 119;             /* #777777 */
+    --color-eel: 75, 75, 75;                 /* #4B4B4B */
+    --color-black-text: 60, 60, 60;          /* #3C3C3C */
+    --color-card-bg: 255, 255, 255;
+    --color-popover-bg: 255, 255, 255;
+
+    /* Brand Colors */
+    --color-feather: 88, 204, 2;             /* #58CC02 */
+    --color-macaw: 28, 176, 246;             /* #1CB0F6 */
+    --color-cardinal: 255, 75, 75;           /* #FF4B4B */
+    --color-bee: 255, 200, 0;                /* #FFC800 */
+    --color-fox: 255, 150, 0;                /* #FF9600 */
+    --color-beetle: 206, 130, 255;           /* #CE82FF */
+    
+    --bg-page: #FFFFFF;
+    --bg-surface: #FFFFFF;
+    --bg-subtle: #F7F7F7;
+    --border-color: #E5E5E5;
+    --text-primary: #4B4B4B;
+    --text-secondary: #777777;
+    --text-muted: #AFAFAF;
+  }
+
+  /* Duolingo Official Dark Mode Tokens (Default) */
+  html.dark, html[data-duo-theme="dark"] {
+    --color-snow: 19, 31, 36;                 /* rgb(19, 31, 36) -> #131F24 */
+    --color-polar: 32, 47, 54;               /* rgb(32, 47, 54) -> #202F36 */
+    --color-swan: 55, 70, 79;                /* rgb(55, 70, 79) -> #37464F */
+    --color-hare: 82, 101, 109;              /* rgb(82, 101, 109) -> #52656D */
+    --color-wolf: 220, 230, 236;             /* rgb(220, 230, 236) -> #DCE6EC */
+    --color-eel: 241, 247, 251;              /* rgb(241, 247, 251) -> #F1F7FB */
+    --color-black-text: 255, 255, 255;
+    --color-card-bg: 32, 47, 54;             /* #202F36 */
+    --color-popover-bg: 19, 31, 36;
+
+    --bg-page: #131F24;
+    --bg-surface: #202F36;
+    --bg-subtle: #2B3B44;
+    --border-color: #37464F;
+    --text-primary: #F1F7FB;
+    --text-secondary: #DCE6EC;
+    --text-muted: #829BA8;
+  }
+}
+
+html {
+  background-color: var(--bg-page);
+  color: var(--text-primary);
+  -webkit-tap-highlight-color: transparent;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+body {
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  background-color: var(--bg-page);
+  color: var(--text-primary);
+  user-select: none;
+  min-height: 100vh;
+}
+
+/* Duolingo Theme Surface Helpers */
+.duo-bg-page {
+  background-color: var(--bg-page);
+}
+
+.duo-bg-surface {
+  background-color: var(--bg-surface);
+}
+
+.duo-bg-subtle {
+  background-color: var(--bg-subtle);
+}
+
+.duo-border {
+  border-color: var(--border-color);
+}
+
+.duo-text-primary {
+  color: var(--text-primary);
+}
+
+.duo-text-secondary {
+  color: var(--text-secondary);
+}
+
+.duo-text-muted {
+  color: var(--text-muted);
+}
+
+/* Duolingo Authentic Micro-Animations */
+@keyframes flameFlicker {
+  0%, 100% {
+    transform: scale(1) rotate(0deg);
+  }
+  20% {
+    transform: scale(1.08, 0.94) rotate(-3deg);
+  }
+  40% {
+    transform: scale(0.95, 1.05) rotate(2.5deg);
+  }
+  60% {
+    transform: scale(1.05, 0.96) rotate(-1.5deg);
+  }
+  80% {
+    transform: scale(0.98, 1.02) rotate(1.5deg);
+  }
+}
+
+@keyframes innerFlameDance {
+  0%, 100% {
+    transform: scale(1) translateY(0);
+    opacity: 0.92;
+  }
+  50% {
+    transform: scale(1.14, 1.18) translateY(-2px);
+    opacity: 1;
+  }
+}
+
+@keyframes heartPulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  14% {
+    transform: scale(1.1);
+  }
+  28% {
+    transform: scale(1);
+  }
+  42% {
+    transform: scale(1.06);
+  }
+  56% {
+    transform: scale(1);
+  }
+}
+
+/* Duolingo Authentic Character Mascot Animations */
+@keyframes duoIdleBob {
+  0%, 100% {
+    transform: translateY(0px) scale(1, 1);
+  }
+  50% {
+    transform: translateY(-4px) scale(1.01, 0.99);
+  }
+}
+
+@keyframes lilyTorsoBreathe {
+  0%, 100% {
+    transform: translateY(0px) scale(1, 1);
+  }
+  50% {
+    transform: translateY(-2.5px) scale(1.015, 0.985);
+  }
+}
+
+@keyframes lilyHeadTilt {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  30% {
+    transform: translateY(-2px) rotate(-1.8deg);
+  }
+  70% {
+    transform: translateY(-1px) rotate(1.2deg);
+  }
+}
+
+@keyframes lilyGarmentDangleLeft {
+  0%, 100% {
+    transform: rotate(0deg);
+  }
+  50% {
+    transform: rotate(3.5deg) translateY(-1px);
+  }
+}
+
+@keyframes lilyGarmentDangleRight {
+  0%, 100% {
+    transform: rotate(0deg);
+  }
+  50% {
+    transform: rotate(-4.5deg) translateY(-1.5px);
+  }
+}
+
+@keyframes lilyHairBangs {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-1px) rotate(-0.8deg);
+  }
+}
+
+@keyframes characterEyeBlink {
+  0%, 93%, 100% {
+    transform: scaleY(1);
+  }
+  96% {
+    transform: scaleY(0.08);
+  }
+}
+
+@keyframes characterPupilGlance {
+  0%, 60%, 100% {
+    transform: translate(0, 0);
+  }
+  25%, 35% {
+    transform: translate(-1.2px, -0.5px);
+  }
+  75%, 85% {
+    transform: translate(1.2px, 0px);
+  }
+}
+
+@keyframes characterShadowPulse {
+  0%, 100% {
+    transform: scale(1, 1);
+    opacity: 0.25;
+  }
+  50% {
+    transform: scale(0.92, 0.88);
+    opacity: 0.18;
+  }
+}
+
+@keyframes juniorPlayfulBounce {
+  0%, 100% {
+    transform: translateY(0px) scale(1, 1);
+  }
+  40% {
+    transform: translateY(-6px) scale(0.98, 1.04);
+  }
+  55% {
+    transform: translateY(-7px) rotate(1.5deg);
+  }
+  75% {
+    transform: translateY(1px) scale(1.03, 0.97);
+  }
+}
+
+@keyframes juniorCapWiggle {
+  0%, 100% {
+    transform: rotate(0deg);
+  }
+  50% {
+    transform: rotate(-3deg) translateY(-1px);
+  }
+}
+
+@keyframes owlWingFlap {
+  0%, 100% {
+    transform: rotate(0deg);
+  }
+  50% {
+    transform: rotate(-8deg) translateY(-2px);
+  }
+}
+
+.animate-flame {
+  transform-origin: center bottom;
+  animation: flameFlicker 1.4s ease-in-out infinite;
+}
+
+.animate-flame-inner {
+  transform-origin: center bottom;
+  animation: innerFlameDance 0.8s ease-in-out infinite alternate;
+}
+
+.animate-heart-pulse {
+  transform-origin: center;
+  animation: heartPulse 2.2s ease-in-out infinite;
+}
+
+/* Character Animation Utility Classes */
+.animate-duo-bob {
+  transform-origin: center bottom;
+  animation: duoIdleBob 2.8s ease-in-out infinite;
+}
+
+.animate-lily-torso {
+  transform-origin: 60px 100px;
+  animation: lilyTorsoBreathe 3.2s ease-in-out infinite;
+}
+
+.animate-lily-head {
+  transform-origin: 60px 60px;
+  animation: lilyHeadTilt 4.2s ease-in-out infinite;
+}
+
+.animate-lily-garment-left {
+  transform-origin: 28px 96px;
+  animation: lilyGarmentDangleLeft 2.6s ease-in-out infinite;
+}
+
+.animate-lily-garment-right {
+  transform-origin: 90px 86px;
+  animation: lilyGarmentDangleRight 3s ease-in-out infinite;
+}
+
+.animate-lily-bangs {
+  transform-origin: 60px 30px;
+  animation: lilyHairBangs 3.2s ease-in-out infinite;
+}
+
+.animate-eye-blink {
+  transform-origin: center;
+  animation: characterEyeBlink 4s ease-in-out infinite;
+}
+
+.animate-pupil-glance {
+  animation: characterPupilGlance 6s ease-in-out infinite;
+}
+
+.animate-shadow-pulse {
+  transform-origin: center;
+  animation: characterShadowPulse 3.2s ease-in-out infinite;
+}
+
+.animate-junior-bounce {
+  transform-origin: center bottom;
+  animation: juniorPlayfulBounce 2.2s ease-in-out infinite;
+}
+
+.animate-junior-cap {
+  transform-origin: 50px 36px;
+  animation: juniorCapWiggle 2.2s ease-in-out infinite;
+}
+
+.animate-owl-wing {
+  transform-origin: top center;
+  animation: owlWingFlap 1.8s ease-in-out infinite;
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+/* Hide scrollbar for IE, Edge and Firefox */
+.no-scrollbar {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
