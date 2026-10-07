@@ -261,7 +261,7 @@ export default function HomePage() {
       {/* 6. Footer */}
       <footer className="border-t-2 duo-border py-8 px-6 duo-bg-surface text-center text-xs font-bold duo-text-secondary">
         <div className="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
-          <p>© 2026 Duolingo Clone. Built with Next.js, FastAPI & SQLite.</p>
+          <p>© 2026 Duolingo Clone.</p>
           <div className="flex gap-6 uppercase tracking-wider text-[11px]">
             <Link href="/learn" className="hover:duo-text-primary">
               Learn
