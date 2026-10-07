@@ -30,6 +30,9 @@
     --text-primary: #4B4B4B;
     --text-secondary: #777777;
     --text-muted: #AFAFAF;
+
+    --color-node-locked-bg: #E5E5E5;
+    --color-node-locked-shadow: #CECECE;
   }
 
   /* Duolingo Official Dark Mode Tokens (Default) */
@@ -51,6 +54,9 @@
     --text-primary: #F1F7FB;
     --text-secondary: #DCE6EC;
     --text-muted: #829BA8;
+
+    --color-node-locked-bg: #37464F;
+    --color-node-locked-shadow: #202F36;
   }
 }
 

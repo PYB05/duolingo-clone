@@ -49,8 +49,8 @@ export function PathNode({
   let shadowColor = themeShadowColor;
 
   if (isLocked) {
-    bgColor = '#37464F'; // dark mode locked slate
-    shadowColor = '#202F36';
+    bgColor = 'var(--color-node-locked-bg, #E5E5E5)'; 
+    shadowColor = 'var(--color-node-locked-shadow, #AFAFAF)';
   } else if (isLegendary) {
     bgColor = '#CE82FF'; // beetle
     shadowColor = '#A568CC';
@@ -80,20 +80,20 @@ export function PathNode({
       className="relative flex flex-col items-center my-3 transition-transform duration-200 select-none"
       style={{ transform: `translateX(${offsetX}px)` }}
     >
-      {/* 1. START Tooltip Bubble for current lesson (matching screenshot 1: dark rounded badge with arrow) */}
+      {/* 1. START Tooltip Bubble for current lesson */}
       {isCurrent && !isLocked && (
         <div className="absolute -top-10 z-30 animate-bounce pointer-events-none">
-          <div className="bg-[#202F36] border-2 border-[#37464F] text-white font-black text-xs uppercase px-3 py-1.5 rounded-xl shadow-lg tracking-widest flex items-center justify-center">
+          <div className="bg-white dark:bg-[#202F36] border-2 border-[#E5E5E5] dark:border-[#37464F] text-[#58CC02] dark:text-white font-black text-xs uppercase px-3 py-1.5 rounded-xl shadow-lg tracking-widest flex items-center justify-center">
             <span>START</span>
             {/* Triangle pointer downward */}
-            <div className="absolute -bottom-1.5 left-1/2 -translate-x-1/2 w-3 h-3 bg-[#202F36] border-b-2 border-r-2 border-[#37464F] rotate-45" />
+            <div className="absolute -bottom-1.5 left-1/2 -translate-x-1/2 w-3 h-3 bg-white dark:bg-[#202F36] border-b-2 border-r-2 border-[#E5E5E5] dark:border-[#37464F] rotate-45" />
           </div>
         </div>
       )}
 
-      {/* 2. Outer Progress Ring on Active Node (matching screenshot 1) */}
+      {/* 2. Outer Progress Ring on Active Node */}
       {isCurrent && !isLocked && (
-        <div className="absolute -inset-2.5 rounded-full border-[5px] border-[#37464F] dark:border-[#37464F] pointer-events-none" />
+        <div className="absolute -inset-2.5 rounded-full border-[5px] border-[#E5E5E5] dark:border-[#37464F] pointer-events-none" />
       )}
 
       {/* 3. Main 3D Node Button (76px diameter, thick 3D base) */}

@@ -42,7 +42,7 @@ function PracticeCard({
   buttonVariant = 'primary',
 }: PracticeCardProps) {
   return (
-    <div className="relative p-6 rounded-3xl border-2 border-[#37464F] hover:border-[#1CB0F6] bg-[#131F24] hover:bg-[#202F36]/70 shadow-lg transition-all flex flex-col justify-between overflow-hidden group">
+    <div className="relative p-6 rounded-3xl border-2 border-[#E5E5E5] dark:border-[#37464F] hover:border-[#1CB0F6] dark:hover:border-[#1CB0F6] bg-white dark:bg-[#131F24] hover:bg-[#F7F7F7] dark:hover:bg-[#202F36]/70 shadow-lg transition-all flex flex-col justify-between overflow-hidden group">
       {badge && (
         <span
           className={`absolute top-5 right-5 text-[11px] font-black uppercase px-3 py-1 rounded-full ${badgeColor} tracking-wider shadow-sm`}
@@ -59,15 +59,15 @@ function PracticeCard({
           {icon}
         </div>
 
-        <h3 className="text-xl font-black text-[#F1F7FB] mb-1.5 transition-colors group-hover:text-[#1CB0F6]">
+        <h3 className="text-xl font-black text-[#3C3C3C] dark:text-[#F1F7FB] mb-1.5 transition-colors group-hover:text-[#1CB0F6]">
           {title}
         </h3>
-        <p className="text-[#829BA8] font-bold text-sm mb-5 leading-relaxed">
+        <p className="text-[#777777] dark:text-[#829BA8] font-bold text-sm mb-5 leading-relaxed">
           {description}
         </p>
       </div>
 
-      <div className="pt-4 border-t border-[#37464F] flex items-center justify-between gap-3">
+      <div className="pt-4 border-t border-[#E5E5E5] dark:border-[#37464F] flex items-center justify-between gap-3">
         <span className="text-xs font-black text-[#FFC800] uppercase tracking-wider flex items-center gap-1.5">
           ⭐ {rewardText}
         </span>
@@ -91,15 +91,15 @@ export default function PracticePage() {
   return (
     <div className="max-w-2xl mx-auto py-8 px-4 select-none space-y-6">
       {/* Header banner */}
-      <div className="flex items-center justify-between gap-4 bg-[#131F24] border-2 border-[#37464F] p-6 sm:p-7 rounded-3xl shadow-lg">
+      <div className="flex items-center justify-between gap-4 bg-white dark:bg-[#131F24] border-2 border-[#E5E5E5] dark:border-[#37464F] p-6 sm:p-7 rounded-3xl shadow-lg transition-colors">
         <div>
           <span className="text-xs font-black uppercase text-[#1CB0F6] tracking-widest block mb-1">
             PRACTICE HUB
           </span>
-          <h1 className="text-2xl sm:text-3xl font-black text-[#F1F7FB] mb-2 leading-tight">
+          <h1 className="text-2xl sm:text-3xl font-black text-[#3C3C3C] dark:text-[#F1F7FB] mb-2 leading-tight">
             Strengthen your Spanish
           </h1>
-          <p className="text-sm font-bold text-[#829BA8] max-w-md leading-relaxed">
+          <p className="text-sm font-bold text-[#777777] dark:text-[#829BA8] max-w-md leading-relaxed">
             Practice past material, review your mistakes, or earn hearts back for free.
           </p>
         </div>

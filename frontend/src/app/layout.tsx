@@ -11,8 +11,16 @@ const nunito = Nunito({
 });
 
 export const metadata: Metadata = {
-  title: 'Duolingo Clone — Free language education',
+  title: 'Duolingo Clone',
   description: 'Learn Spanish in bite-sized, interactive lessons with gamification, streaks, and leagues.',
+  icons: {
+    icon: [
+      { url: '/favicon.svg?v=4', type: 'image/svg+xml' },
+      { url: '/favicon.ico?v=4', type: 'image/x-icon' },
+    ],
+    shortcut: '/favicon.svg?v=4',
+    apple: '/favicon.svg?v=4',
+  },
 };
 
 export default function RootLayout({

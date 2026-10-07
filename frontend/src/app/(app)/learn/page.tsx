@@ -8,6 +8,7 @@ import { PathNode } from '@/components/path/PathNode';
 import { PathPopover } from '@/components/path/PathPopover';
 import { OwlMascot } from '@/components/mascot/OwlMascot';
 import { CharacterAvatar } from '@/components/mascot/CharacterAvatar';
+import { DuoLoadingScreen } from '@/components/ui/DuoLoadingScreen';
 
 // Authentic Duolingo Path Zig-Zag Offsets matching screenshot 1
 const ZIG_ZAG_OFFSETS = [0, 45, 75, 45, 0, -45, -75, -45];
@@ -37,12 +38,10 @@ export default function LearnPage() {
 
   if (isLoading) {
     return (
-      <div className="flex flex-col items-center justify-center min-h-[60vh] gap-4">
-        <OwlMascot expression="thinking" className="w-24 h-24 animate-pulse" />
-        <span className="font-extrabold duo-text-secondary text-sm tracking-wider">
-          LOADING YOUR PATH...
-        </span>
-      </div>
+      <DuoLoadingScreen
+        message="LOADING YOUR PATH..."
+        subtext="Preparing your units and personalized exercises!"
+      />
     );
   }
 

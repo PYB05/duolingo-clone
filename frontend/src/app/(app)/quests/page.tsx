@@ -7,6 +7,7 @@ import { ChestIcon, GemIcon } from '@/components/icons';
 import { ProgressBar } from '@/components/ui/ProgressBar';
 import { Button } from '@/components/ui/Button';
 import { OwlMascot } from '@/components/mascot/OwlMascot';
+import { DuoLoadingScreen } from '@/components/ui/DuoLoadingScreen';
 
 export default function QuestsPage() {
   const queryClient = useQueryClient();
@@ -30,10 +31,10 @@ export default function QuestsPage() {
 
   if (isLoading || !quests) {
     return (
-      <div className="flex flex-col items-center justify-center min-h-[60vh]">
-        <OwlMascot expression="thinking" className="w-20 h-20 animate-pulse mb-3" />
-        <span className="font-extrabold duo-text-secondary text-sm tracking-wider">LOADING QUESTS...</span>
-      </div>
+      <DuoLoadingScreen
+        message="LOADING QUESTS..."
+        subtext="Fetching daily challenges and October badge goals!"
+      />
     );
   }
 
@@ -119,28 +120,68 @@ export default function QuestsPage() {
           {quests.monthly_quests.map((q) => (
             <div
               key={q.id}
-              className="p-6 rounded-3xl border-2 border-beetle bg-gradient-to-r from-purple-950/30 to-indigo-950/30"
+              className="p-6 rounded-3xl border-2 border-[#CE82FF]/60 dark:border-[#CE82FF]/40 bg-[#FAF5FF] dark:bg-[#1A162B] shadow-lg relative overflow-hidden transition-colors"
             >
-              <div className="flex items-center justify-between mb-4">
-                <div>
-                  <h3 className="text-xl font-black text-beetle">{q.title}</h3>
-                  <p className="text-xs font-bold duo-text-secondary mt-1">
-                    Earn gems by completing this month’s challenge!
-                  </p>
+              {/* Subtle Ambient Glow in Dark Mode */}
+              <div className="absolute -top-12 -right-12 w-48 h-48 bg-[#CE82FF]/10 dark:bg-[#CE82FF]/15 rounded-full blur-3xl pointer-events-none" />
+
+              <div className="flex items-start sm:items-center justify-between gap-4 mb-4 relative z-10">
+                <div className="flex items-center gap-3.5">
+                  {/* 3D October Challenge Badge / Medal Icon */}
+                  <div className="w-14 h-14 rounded-2xl bg-white dark:bg-[#251E38] border-2 border-b-4 border-[#E9D5FF] dark:border-[#3E345C] flex items-center justify-center shrink-0 shadow-sm">
+                    <svg viewBox="0 0 36 36" fill="none" className="w-9 h-9 drop-shadow select-none">
+                      {/* Ribbon Tails */}
+                      <path d="M12 22L8 34L14 31L18 34L16 22Z" fill="#CE82FF" />
+                      <path d="M24 22L28 34L22 31L18 34L20 22Z" fill="#A855F7" />
+                      {/* Medal Outer Rim */}
+                      <circle cx="18" cy="16" r="13" fill="#D97706" />
+                      <circle cx="18" cy="15" r="12.5" fill="#FFC800" />
+                      {/* Medal Inset Face */}
+                      <circle cx="18" cy="15" r="9.5" fill="#FFA000" />
+                      {/* 3D Gold Star */}
+                      <path
+                        d="M18 8L20 13L25 13.5L21.2 17L22.2 22L18 19.5L13.8 22L14.8 17L11 13.5L16 13L18 8Z"
+                        fill="#FFFFFF"
+                      />
+                    </svg>
+                  </div>
+
+                  <div>
+                    <div className="flex items-center gap-2 mb-1">
+                      <span className="text-[10px] font-black uppercase tracking-widest text-[#7E22CE] dark:text-[#E9D5FF] bg-[#CE82FF]/20 dark:bg-[#CE82FF]/25 border border-[#CE82FF]/30 dark:border-[#CE82FF]/40 px-2.5 py-0.5 rounded-full">
+                        OCTOBER BADGE
+                      </span>
+                    </div>
+                    <h3 className="text-xl font-black text-[#2E1065] dark:text-[#FFFFFF] leading-snug">
+                      {q.title}
+                    </h3>
+                    <p className="text-xs sm:text-sm font-bold text-[#6B21A8] dark:text-[#D8B4FE] mt-0.5">
+                      Earn gems by completing this month’s challenge!
+                    </p>
+                  </div>
                 </div>
-                <div className="flex items-center gap-1.5 font-black text-base text-beetle duo-bg-surface px-3 py-1.5 rounded-2xl border border-beetle-shadow shadow-sm">
-                  <GemIcon className="w-5 h-5" />
+
+                {/* 3D Duolingo Gem Reward Badge */}
+                <div className="flex items-center gap-1.5 font-black text-sm text-[#1CB0F6] bg-white dark:bg-[#202F36] px-3.5 py-2 rounded-2xl border-2 border-b-4 border-[#E5E5E5] dark:border-[#37464F] shadow-sm shrink-0">
+                  <GemIcon className="w-5 h-5 drop-shadow" />
                   <span>+{q.reward_gems}</span>
                 </div>
               </div>
 
-              <div className="flex justify-between text-xs font-extrabold duo-text-secondary mb-1.5">
-                <span>Progress</span>
-                <span>
-                  {q.progress} / {q.target} XP
-                </span>
+              {/* Progress Labels & Bar */}
+              <div className="relative z-10 pt-1">
+                <div className="flex justify-between text-xs font-black uppercase tracking-wider text-[#7E22CE] dark:text-[#F1F7FB] mb-2">
+                  <span>Progress</span>
+                  <span className="text-[#9333EA] dark:text-[#CE82FF]">
+                    {q.progress} / {q.target} XP
+                  </span>
+                </div>
+                <ProgressBar
+                  progress={(q.progress / q.target) * 100}
+                  color="bee"
+                  className="h-4.5 bg-[#E9D5FF]/60 dark:bg-[#2B2342] border border-[#D8B4FE]/50 dark:border-[#3E345C]"
+                />
               </div>
-              <ProgressBar progress={(q.progress / q.target) * 100} color="bee" />
             </div>
           ))}
         </div>

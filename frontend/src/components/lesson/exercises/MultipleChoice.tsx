@@ -4,6 +4,7 @@ import React, { useEffect, useCallback } from 'react';
 import { SanitizedExercise } from '@/types/api';
 import { OptionCard } from '@/components/ui/OptionCard';
 import { SpeakerIcon } from '@/components/icons';
+import { ExerciseIllustration } from '@/components/icons/ExerciseIcons';
 import { speakText } from '@/lib/tts';
 
 export interface ExerciseProps {
@@ -42,7 +43,7 @@ export function MultipleChoice({
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [disabled, exercise.options, handleSelect]);
 
-  const hasEmoji = exercise.options.some((o) => o.emoji);
+  const hasMedia = exercise.options.some((o) => !!o.emoji || !!(o as any).image_url);
 
   return (
     <div className="w-full flex flex-col items-center">
@@ -64,7 +65,7 @@ export function MultipleChoice({
       {/* Options Grid */}
       <div
         className={`w-full grid gap-4 ${
-          hasEmoji ? 'grid-cols-1 sm:grid-cols-3' : 'grid-cols-1'
+          hasMedia ? 'grid-cols-1 sm:grid-cols-3' : 'grid-cols-1'
         }`}
       >
         {exercise.options.map((opt, idx) => (
@@ -74,9 +75,9 @@ export function MultipleChoice({
             disabled={disabled}
             onClick={() => handleSelect(opt.id)}
             numberHint={idx + 1}
-            className={hasEmoji ? 'flex-col justify-center text-center py-6 h-40' : 'py-4'}
+            className={hasMedia ? 'flex-col justify-center text-center py-6 min-h-[160px]' : 'py-4'}
           >
-            {opt.emoji && <span className="text-4xl mb-2">{opt.emoji}</span>}
+            <ExerciseIllustration text={opt.text} emoji={opt.emoji} className="w-16 h-16 mb-2" />
             <span className="text-base sm:text-lg font-bold">{opt.text}</span>
           </OptionCard>
         ))}

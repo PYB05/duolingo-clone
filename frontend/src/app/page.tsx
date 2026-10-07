@@ -5,7 +5,6 @@ import Link from 'next/link';
 import { OwlMascot } from '@/components/mascot/OwlMascot';
 import { Button } from '@/components/ui/Button';
 import { FlameIcon, HeartIcon, BoltIcon, StarIcon } from '@/components/icons';
-import { ThemeToggle } from '@/components/ui/ThemeToggle';
 import { Flag } from '@/components/ui/Flag';
 
 export default function HomePage() {
@@ -61,7 +60,6 @@ export default function HomePage() {
         </Link>
 
         <div className="flex items-center gap-4">
-          <ThemeToggle />
           <Link href="/learn">
             <Button variant="ghost" size="sm">
               SIGN IN

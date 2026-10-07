@@ -5,7 +5,7 @@ import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { api } from '@/lib/api';
 import { GemIcon, HeartIcon } from '@/components/icons';
 import { Button } from '@/components/ui/Button';
-import { OwlMascot } from '@/components/mascot/OwlMascot';
+import { DuoLoadingScreen } from '@/components/ui/DuoLoadingScreen';
 
 export default function ShopPage() {
   const queryClient = useQueryClient();
@@ -27,10 +27,10 @@ export default function ShopPage() {
 
   if (isLoading || !shop) {
     return (
-      <div className="flex flex-col items-center justify-center min-h-[60vh]">
-        <OwlMascot expression="thinking" className="w-20 h-20 animate-pulse mb-3" />
-        <span className="font-extrabold duo-text-secondary text-sm tracking-wider">LOADING SHOP...</span>
-      </div>
+      <DuoLoadingScreen
+        message="LOADING SHOP..."
+        subtext="Stocking up streaks, freezes, and hearts!"
+      />
     );
   }
 

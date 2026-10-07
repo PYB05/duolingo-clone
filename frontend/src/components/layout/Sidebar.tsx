@@ -30,7 +30,7 @@ export function Sidebar() {
   ];
 
   return (
-    <aside className="fixed left-0 top-0 bottom-0 w-64 border-r-2 border-[#37464F] dark:border-[#37464F] bg-[#131F24] dark:bg-[#131F24] flex flex-col justify-between p-4 z-40 hidden md:flex select-none">
+    <aside className="fixed left-0 top-0 bottom-0 w-64 border-r-2 border-[#E5E5E5] dark:border-[#37464F] bg-white dark:bg-[#131F24] flex flex-col justify-between p-4 z-40 hidden md:flex select-none transition-colors">
       <div>
         {/* Brand Header */}
         <Link href="/learn" className="flex items-center gap-2 px-4 pt-6 pb-8">
@@ -50,12 +50,12 @@ export function Sidebar() {
                 className={cn(
                   'flex items-center gap-4 px-4 py-3 rounded-2xl font-black text-sm tracking-wider uppercase transition-all duration-100',
                   isActive
-                    ? 'bg-[#202F36] border-2 border-[#84D8FF] text-[#1CB0F6] shadow-sm'
-                    : 'text-[#F1F7FB] hover:bg-[#202F36]/60 border-2 border-transparent'
+                    ? 'bg-[#DDF4FF] dark:bg-[#202F36] border-2 border-[#84D8FF] text-[#1CB0F6] shadow-sm'
+                    : 'text-[#4B4B4B] dark:text-[#F1F7FB] hover:bg-[#F7F7F7] dark:hover:bg-[#202F36]/60 border-2 border-transparent'
                 )}
               >
                 <div className="shrink-0 flex items-center justify-center w-8 h-8">{item.icon}</div>
-                <span className={cn('text-sm font-black', isActive ? 'text-[#1CB0F6]' : 'text-[#F1F7FB]')}>
+                <span className={cn('text-sm font-black', isActive ? 'text-[#1CB0F6]' : 'text-[#4B4B4B] dark:text-[#F1F7FB]')}>
                   {item.label}
                 </span>
               </Link>
@@ -65,7 +65,7 @@ export function Sidebar() {
       </div>
 
       {/* Footer Theme Toggle & Settings */}
-      <div className="pt-4 border-t border-[#37464F] space-y-2">
+      <div className="pt-4 border-t border-[#E5E5E5] dark:border-[#37464F] space-y-2">
         <ThemeToggle className="w-full" />
 
         <Link
@@ -73,14 +73,14 @@ export function Sidebar() {
           className={cn(
             'flex items-center gap-4 px-4 py-3 rounded-2xl font-black text-sm tracking-wider uppercase transition-colors',
             pathname === '/settings'
-              ? 'bg-[#202F36] border-2 border-[#84D8FF] text-[#1CB0F6]'
-              : 'text-[#F1F7FB] hover:bg-[#202F36]/60 border-2 border-transparent'
+              ? 'bg-[#DDF4FF] dark:bg-[#202F36] border-2 border-[#84D8FF] text-[#1CB0F6]'
+              : 'text-[#4B4B4B] dark:text-[#F1F7FB] hover:bg-[#F7F7F7] dark:hover:bg-[#202F36]/60 border-2 border-transparent'
           )}
         >
           <div className="shrink-0 flex items-center justify-center w-7 h-7">
             <DuolingoGearIcon className="w-7 h-7" />
           </div>
-          <span className={cn('text-sm font-black', pathname === '/settings' ? 'text-[#1CB0F6]' : 'text-[#F1F7FB]')}>
+          <span className={cn('text-sm font-black', pathname === '/settings' ? 'text-[#1CB0F6]' : 'text-[#4B4B4B] dark:text-[#F1F7FB]')}>
             SETTINGS
           </span>
         </Link>

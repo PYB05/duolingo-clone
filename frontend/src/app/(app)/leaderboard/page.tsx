@@ -5,7 +5,7 @@ import { useQuery } from '@tanstack/react-query';
 import { api } from '@/lib/api';
 import { ShieldIcon } from '@/components/icons';
 import { cn } from '@/lib/utils';
-import { OwlMascot } from '@/components/mascot/OwlMascot';
+import { DuoLoadingScreen } from '@/components/ui/DuoLoadingScreen';
 
 export default function LeaderboardPage() {
   const { data: lb, isLoading } = useQuery({
@@ -15,12 +15,10 @@ export default function LeaderboardPage() {
 
   if (isLoading || !lb) {
     return (
-      <div className="flex flex-col items-center justify-center min-h-[60vh]">
-        <OwlMascot expression="thinking" className="w-20 h-20 animate-pulse mb-3" />
-        <span className="font-extrabold duo-text-secondary text-sm tracking-wider">
-          LOADING LEAGUES...
-        </span>
-      </div>
+      <DuoLoadingScreen
+        message="LOADING LEAGUES..."
+        subtext="Fetching the latest division rankings!"
+      />
     );
   }
 

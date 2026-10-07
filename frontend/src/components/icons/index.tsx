@@ -356,5 +356,6 @@ export function TurtleIcon({ className = 'w-6 h-6' }: { className?: string }) {
 export * from './NavIcons';
 export * from './WidgetIcons';
 export * from './PracticeIcons';
+export * from './ExerciseIcons';
 
 

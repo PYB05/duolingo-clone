@@ -12,10 +12,12 @@ import {
   QuestMiniChest,
 } from '../icons/WidgetIcons';
 import { BoltIcon } from '../icons';
+import { SuperDuolingoModal } from '../ui/SuperDuolingoModal';
 
 export function RightRail() {
   const railRef = useRef<HTMLElement>(null);
   const [stickyTop, setStickyTop] = useState<number>(16);
+  const [superModalOpen, setSuperModalOpen] = useState(false);
 
   const { data: quests } = useQuery({ queryKey: ['quests'], queryFn: () => api.getQuests() });
 
@@ -55,41 +57,47 @@ export function RightRail() {
   }, []);
 
   return (
-    <aside
-      ref={railRef}
-      className="hidden lg:flex flex-col gap-6 w-[370px] shrink-0 select-none pb-4 self-start sticky"
-      style={{ top: `${stickyTop}px` }}
-    >
-      {/* Top stats bar row (perfectly centered) */}
-      <div className="w-full">
-        <TopStatsBar />
-      </div>
+    <>
+      <SuperDuolingoModal
+        isOpen={superModalOpen}
+        onClose={() => setSuperModalOpen(false)}
+      />
 
-      {/* 1. Super Duolingo Promotion Card */}
-      <div className="p-6 rounded-3xl border-2 border-[#E5E5E5] dark:border-[#37464F] bg-white dark:bg-[#131F24] relative overflow-hidden shadow-lg transition-colors">
-        <div className="flex items-start justify-between gap-3 mb-4">
-          <div>
-            <SuperBadge className="h-6 mb-3" />
-            <h3 className="font-black text-lg text-[#3C3C3C] dark:text-[#F1F7FB] leading-snug">
-              Try Super for free
-            </h3>
-          </div>
-          <div className="shrink-0 -mt-1 -mr-2">
-            <SuperFlyingDuo className="w-28 h-24" />
-          </div>
+      <aside
+        ref={railRef}
+        className="hidden lg:flex flex-col gap-6 w-[370px] shrink-0 select-none pb-4 self-start sticky"
+        style={{ top: `${stickyTop}px` }}
+      >
+        {/* Top stats bar row (perfectly centered) */}
+        <div className="w-full">
+          <TopStatsBar />
         </div>
 
-        <p className="text-sm font-bold text-[#777777] dark:text-[#829BA8] leading-relaxed mb-6">
-          No ads, personalized practice, and unlimited Legendary!
-        </p>
+        {/* 1. Super Duolingo Promotion Card */}
+        <div className="p-6 rounded-3xl border-2 border-[#E5E5E5] dark:border-[#37464F] bg-white dark:bg-[#131F24] relative overflow-hidden shadow-lg transition-colors group">
+          <div className="flex items-start justify-between gap-3 mb-4">
+            <div>
+              <SuperBadge className="h-6 mb-3" />
+              <h3 className="font-black text-lg text-[#3C3C3C] dark:text-[#F1F7FB] leading-snug">
+                Try Super for free
+              </h3>
+            </div>
+            <div className="shrink-0 -mt-1 -mr-2 group-hover:scale-105 transition-transform">
+              <SuperFlyingDuo className="w-28 h-24" />
+            </div>
+          </div>
 
-        <button
-          onClick={() => alert('Super Duolingo feature activated!')}
-          className="w-full py-3.5 bg-[#4F46E5] hover:bg-[#4338CA] active:scale-98 text-white font-black text-xs uppercase tracking-widest rounded-2xl border-b-4 border-[#3730A3] transition-all shadow-md"
-        >
-          TRY 1 WEEK FREE
-        </button>
-      </div>
+          <p className="text-sm font-bold text-[#777777] dark:text-[#829BA8] leading-relaxed mb-6">
+            No ads, personalized practice, and unlimited Legendary!
+          </p>
+
+          <button
+            onClick={() => setSuperModalOpen(true)}
+            className="w-full py-3.5 bg-[#4F46E5] hover:bg-[#4338CA] active:scale-98 text-white font-black text-xs uppercase tracking-widest rounded-2xl border-b-4 border-[#3730A3] transition-all shadow-md flex items-center justify-center gap-2"
+          >
+            <span>TRY 1 WEEK FREE</span>
+          </button>
+        </div>
 
       {/* 2. Leaderboards Congratulations Card */}
       <div className="p-6 rounded-3xl border-2 border-[#E5E5E5] dark:border-[#37464F] bg-white dark:bg-[#131F24] shadow-lg transition-colors">
@@ -180,5 +188,6 @@ export function RightRail() {
         </div>
       </footer>
     </aside>
+  </>
   );
 }
