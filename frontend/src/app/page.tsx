@@ -4,7 +4,12 @@ import React from 'react';
 import Link from 'next/link';
 import { OwlMascot } from '@/components/mascot/OwlMascot';
 import { Button } from '@/components/ui/Button';
-import { FlameIcon, HeartIcon, BoltIcon, StarIcon } from '@/components/icons';
+import {
+  FlameIcon,
+  PracticeHeart3D,
+  SapphireHexBadge,
+  SuperFlyingDuo,
+} from '@/components/icons';
 import { Flag } from '@/components/ui/Flag';
 
 export default function HomePage() {
@@ -16,40 +21,7 @@ export default function HomePage() {
     { name: 'Italian', code: 'IT', learners: '9M learners' },
   ];
 
-  const features = [
-    {
-      title: 'Free. Fun. Effective.',
-      description:
-        'Learning with Duolingo is fun, and research shows that it works! With quick, bite-sized lessons, you’ll earn points and unlock new levels while gaining real-world communication skills.',
-      icon: <StarIcon className="w-8 h-8 text-bee" />,
-      bg: 'bg-bee/10',
-      border: 'border-bee/30',
-    },
-    {
-      title: 'Backed by Science',
-      description:
-        'We use a combination of research-backed teaching methods and delightfully delightful content to create courses that effectively teach reading, writing, listening, and speaking skills.',
-      icon: <BoltIcon className="w-8 h-8 text-macaw" />,
-      bg: 'bg-sky/20',
-      border: 'border-sky-border',
-    },
-    {
-      title: 'Stay Motivated',
-      description:
-        'We make it easy to form a habit of language learning with game-like features, fun challenges, and reminders from our friendly mascot, Duo the Owl.',
-      icon: <FlameIcon className="w-8 h-8 text-fox" active />,
-      bg: 'bg-fox/15',
-      border: 'border-fox/30',
-    },
-    {
-      title: 'Personalized Learning',
-      description:
-        'Combining the best of AI and language science, lessons are tailored to help you learn at just the right level and pace, re-testing concepts you found difficult.',
-      icon: <HeartIcon className="w-8 h-8 text-cardinal" active />,
-      bg: 'bg-cardinal/15',
-      border: 'border-cardinal/30',
-    },
-  ];
+
 
   return (
     <div className="min-h-screen duo-bg-page duo-text-primary select-none flex flex-col justify-between">
@@ -128,29 +100,143 @@ export default function HomePage() {
           </div>
         </section>
 
-        {/* 4. Features Section */}
-        <section className="max-w-6xl mx-auto px-6 py-16 sm:py-24">
-          <h2 className="text-2xl sm:text-3xl font-black text-center duo-text-primary mb-12">
-            Why you&apos;ll love learning with us
-          </h2>
+        {/* 4. Official Duolingo Illustrated Storytelling Feature Showcase */}
+        <section className="py-20 sm:py-28 max-w-6xl mx-auto px-6 space-y-24 sm:space-y-36">
+          <div className="text-center max-w-2xl mx-auto">
+            <span className="text-xs font-black uppercase tracking-widest text-[#58CC02] bg-[#58CC02]/15 px-3.5 py-1.5 rounded-full inline-block mb-3">
+              THE DUOLINGO DIFFERENCE
+            </span>
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-black duo-text-primary tracking-tight">
+              Why you&apos;ll love learning with us
+            </h2>
+          </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {features.map((feat) => (
-              <div
-                key={feat.title}
-                className={`p-8 rounded-3xl border-2 ${feat.border} duo-bg-surface shadow-sm flex items-start gap-6`}
-              >
-                <div
-                  className={`w-16 h-16 rounded-2xl flex items-center justify-center shrink-0 ${feat.bg}`}
-                >
-                  {feat.icon}
-                </div>
-                <div>
-                  <h3 className="text-xl font-black duo-text-primary mb-2">{feat.title}</h3>
-                  <p className="duo-text-secondary font-bold text-sm leading-relaxed">{feat.description}</p>
+          {/* Feature 1: free. fun. effective. */}
+          <div className="flex flex-col md:flex-row items-center justify-between gap-12 sm:gap-20">
+            <div className="flex-1 flex justify-center">
+              <div className="relative w-64 h-64 sm:w-80 sm:h-80 flex items-center justify-center">
+                <div className="absolute inset-0 bg-[#58CC02]/10 dark:bg-[#58CC02]/15 rounded-full blur-3xl pointer-events-none" />
+                <div className="relative z-10 flex flex-col items-center">
+                  <OwlMascot
+                    expression="celebrating"
+                    className="w-56 h-56 sm:w-64 sm:h-64 drop-shadow-2xl hover:scale-105 transition-transform cursor-pointer"
+                  />
+                  <div className="absolute -bottom-3 bg-white dark:bg-[#202F36] border-2 border-b-4 border-[#E5E5E5] dark:border-[#37464F] px-4 py-2 rounded-2xl flex items-center gap-2 shadow-lg">
+                    <span className="text-lg">⭐</span>
+                    <span className="font-black text-xs uppercase tracking-wider text-[#58CC02]">
+                      +50 XP EARNED
+                    </span>
+                  </div>
                 </div>
               </div>
-            ))}
+            </div>
+
+            <div className="flex-1 text-center md:text-left">
+              <span className="text-xs font-black uppercase tracking-widest text-[#58CC02] bg-[#58CC02]/15 px-3 py-1 rounded-full mb-3 inline-block">
+                GAMIFIED LESSONS
+              </span>
+              <h3 className="text-3xl sm:text-4xl lg:text-5xl font-black text-[#58CC02] lowercase tracking-tight mb-4">
+                free. fun. effective.
+              </h3>
+              <p className="text-base sm:text-lg font-bold duo-text-secondary leading-relaxed max-w-lg">
+                Learning with Duolingo is fun, and research shows that it works! With quick, bite-sized lessons, you’ll earn points and unlock new levels while gaining real-world communication skills.
+              </p>
+            </div>
+          </div>
+
+          {/* Feature 2: backed by science. (Reversed) */}
+          <div className="flex flex-col md:flex-row-reverse items-center justify-between gap-12 sm:gap-20">
+            <div className="flex-1 flex justify-center">
+              <div className="relative w-64 h-64 sm:w-80 sm:h-80 flex items-center justify-center">
+                <div className="absolute inset-0 bg-[#1CB0F6]/10 dark:bg-[#1CB0F6]/15 rounded-full blur-3xl pointer-events-none" />
+                <div className="relative z-10 flex flex-col items-center">
+                  <OwlMascot
+                    expression="thinking"
+                    className="w-52 h-52 sm:w-60 sm:h-60 drop-shadow-2xl hover:scale-105 transition-transform cursor-pointer"
+                  />
+                  <div className="absolute -bottom-3 bg-white dark:bg-[#202F36] border-2 border-b-4 border-[#E5E5E5] dark:border-[#37464F] px-4 py-2 rounded-2xl flex items-center gap-2 shadow-lg">
+                    <SapphireHexBadge className="w-6 h-6" />
+                    <span className="font-black text-xs uppercase tracking-wider text-[#1CB0F6]">
+                      PROVEN METHOD
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="flex-1 text-center md:text-left">
+              <span className="text-xs font-black uppercase tracking-widest text-[#1CB0F6] bg-[#1CB0F6]/15 px-3 py-1 rounded-full mb-3 inline-block">
+                RESEARCH-BACKED
+              </span>
+              <h3 className="text-3xl sm:text-4xl lg:text-5xl font-black text-[#1CB0F6] lowercase tracking-tight mb-4">
+                backed by science.
+              </h3>
+              <p className="text-base sm:text-lg font-bold duo-text-secondary leading-relaxed max-w-lg">
+                We use a combination of research-backed teaching methods and delightfully engaging content to create courses that effectively teach reading, writing, listening, and speaking skills.
+              </p>
+            </div>
+          </div>
+
+          {/* Feature 3: stay motivated. */}
+          <div className="flex flex-col md:flex-row items-center justify-between gap-12 sm:gap-20">
+            <div className="flex-1 flex justify-center">
+              <div className="relative w-64 h-64 sm:w-80 sm:h-80 flex items-center justify-center">
+                <div className="absolute inset-0 bg-[#FF9600]/10 dark:bg-[#FF9600]/15 rounded-full blur-3xl pointer-events-none" />
+                <div className="relative z-10 flex flex-col items-center">
+                  <div className="w-52 h-52 sm:w-60 sm:h-60 rounded-3xl bg-gradient-to-tr from-[#FF9600]/20 via-[#FF9600]/10 to-transparent border-2 border-[#FF9600]/30 flex items-center justify-center shadow-inner hover:scale-105 transition-transform">
+                    <FlameIcon className="w-32 h-32 sm:w-40 sm:h-40 drop-shadow-2xl" active />
+                  </div>
+                  <div className="absolute -bottom-3 bg-white dark:bg-[#202F36] border-2 border-b-4 border-[#E5E5E5] dark:border-[#37464F] px-5 py-2.5 rounded-2xl flex items-center gap-2.5 shadow-lg">
+                    <span className="w-2.5 h-2.5 rounded-full bg-[#FF9600] animate-ping" />
+                    <span className="font-black text-sm uppercase tracking-wider text-[#FF9600]">
+                      7 DAY STREAK!
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="flex-1 text-center md:text-left">
+              <span className="text-xs font-black uppercase tracking-widest text-[#FF9600] bg-[#FF9600]/15 px-3 py-1 rounded-full mb-3 inline-block">
+                HABIT FORMATION
+              </span>
+              <h3 className="text-3xl sm:text-4xl lg:text-5xl font-black text-[#FF9600] lowercase tracking-tight mb-4">
+                stay motivated.
+              </h3>
+              <p className="text-base sm:text-lg font-bold duo-text-secondary leading-relaxed max-w-lg">
+                We make it easy to form a habit of language learning with game-like features, fun challenges, and friendly reminders from our friendly mascot, Duo the Owl.
+              </p>
+            </div>
+          </div>
+
+          {/* Feature 4: personalized learning. (Reversed) */}
+          <div className="flex flex-col md:flex-row-reverse items-center justify-between gap-12 sm:gap-20">
+            <div className="flex-1 flex justify-center">
+              <div className="relative w-64 h-64 sm:w-80 sm:h-80 flex items-center justify-center">
+                <div className="absolute inset-0 bg-[#FF4B4B]/10 dark:bg-[#FF4B4B]/15 rounded-full blur-3xl pointer-events-none" />
+                <div className="relative z-10 flex flex-col items-center">
+                  <SuperFlyingDuo className="w-52 h-52 sm:w-64 sm:h-64 drop-shadow-2xl hover:scale-105 transition-transform cursor-pointer" />
+                  <div className="absolute -bottom-3 bg-white dark:bg-[#202F36] border-2 border-b-4 border-[#E5E5E5] dark:border-[#37464F] px-4 py-2 rounded-2xl flex items-center gap-2 shadow-lg">
+                    <PracticeHeart3D className="w-5 h-5 drop-shadow" />
+                    <span className="font-black text-xs uppercase tracking-wider text-[#FF4B4B]">
+                      SMART PRACTICE
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="flex-1 text-center md:text-left">
+              <span className="text-xs font-black uppercase tracking-widest text-[#FF4B4B] bg-[#FF4B4B]/15 px-3 py-1 rounded-full mb-3 inline-block">
+                AI ADAPTIVE
+              </span>
+              <h3 className="text-3xl sm:text-4xl lg:text-5xl font-black text-[#FF4B4B] lowercase tracking-tight mb-4">
+                personalized learning.
+              </h3>
+              <p className="text-base sm:text-lg font-bold duo-text-secondary leading-relaxed max-w-lg">
+                Combining the best of AI and language science, lessons are tailored to help you learn at just the right level and pace, re-testing concepts you found difficult.
+              </p>
+            </div>
           </div>
         </section>
 
