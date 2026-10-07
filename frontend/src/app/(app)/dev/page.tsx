@@ -141,99 +141,133 @@ export default function DevToolsPage() {
         </div>
       )}
 
-      {/* 2. Duolingo Live Stats Grid with Inset 3D Tiles */}
-      <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-        {/* Streak Card */}
-        <div
-          onClick={() => sfx.play('streak')}
-          className="p-4 rounded-2xl border-2 border-[#37464F] hover:border-[#FF9600] bg-[#131F24] hover:bg-[#202F36]/60 transition-all cursor-pointer group shadow-sm flex flex-col justify-between"
-        >
-          <div className="flex items-center justify-between mb-2">
-            <div className="w-10 h-10 rounded-xl bg-[#FF9600]/15 border-2 border-b-4 border-[#FF9600]/30 flex items-center justify-center group-hover:scale-110 transition-transform">
-              <FlameIcon className="w-5 h-5 text-[#FF9600]" active />
-            </div>
-            <span className="text-[10px] font-black text-[#FF9600] bg-[#FF9600]/15 px-2 py-0.5 rounded-full">
-              STREAK
-            </span>
-          </div>
-          <div>
-            <div className="text-2xl font-black text-[#F1F7FB]">
-              {user?.displayed_streak ?? 0}{' '}
-              <span className="text-xs font-black text-[#829BA8] uppercase">days</span>
-            </div>
-            <div className="text-[11px] text-[#829BA8] font-bold mt-1">
-              Offset: <span className="text-[#F1F7FB]">{settings?.debug_day_offset ?? user?.settings?.debug_day_offset ?? 0}d</span>
-            </div>
-          </div>
+      {/* 2. Unified Duolingo Stats Bar Section */}
+      <div className="bg-[#131F24] border-2 border-[#37464F] rounded-3xl p-4 sm:p-5 shadow-lg">
+        <div className="flex items-center justify-between mb-3 px-1">
+          <span className="text-[11px] font-black uppercase text-[#829BA8] tracking-widest flex items-center gap-1.5">
+            <span className="w-2 h-2 rounded-full bg-[#58CC02] animate-pulse" />
+            LIVE ACCOUNT METRICS
+          </span>
+          <span className="text-[11px] font-bold text-[#52656F]">
+            Click any metric to test sound
+          </span>
         </div>
 
-        {/* Hearts Card */}
-        <div
-          onClick={() => sfx.play('tap')}
-          className="p-4 rounded-2xl border-2 border-[#37464F] hover:border-[#FF4B4B] bg-[#131F24] hover:bg-[#202F36]/60 transition-all cursor-pointer group shadow-sm flex flex-col justify-between"
-        >
-          <div className="flex items-center justify-between mb-2">
-            <div className="w-10 h-10 rounded-xl bg-[#FF4B4B]/15 border-2 border-b-4 border-[#FF4B4B]/30 flex items-center justify-center group-hover:scale-110 transition-transform">
-              <PracticeHeart3D className="w-5 h-5" />
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+          {/* Streak Card */}
+          <div
+            onClick={() => sfx.play('streak')}
+            className="p-4 rounded-2xl bg-[#202F36] hover:bg-[#263842] border-2 border-[#37464F] hover:border-[#FF9600] transition-all cursor-pointer group flex flex-col justify-between"
+          >
+            <div className="flex items-center justify-between mb-3">
+              <div className="flex items-center gap-2">
+                <FlameIcon className="w-6 h-6 text-[#FF9600] group-hover:scale-110 transition-transform drop-shadow" active />
+                <span className="text-xs font-black uppercase text-[#FF9600] tracking-wider">
+                  Streak
+                </span>
+              </div>
+              <span className="text-[10px] font-black text-[#FF9600] bg-[#FF9600]/20 px-2 py-0.5 rounded-lg border border-[#FF9600]/30">
+                ACTIVE
+              </span>
             </div>
-            <span className="text-[10px] font-black text-[#FF4B4B] bg-[#FF4B4B]/15 px-2 py-0.5 rounded-full">
-              {user?.hearts === 5 ? 'FULL' : 'REGEN'}
-            </span>
+            <div>
+              <div className="text-2xl sm:text-3xl font-black text-[#F1F7FB] flex items-baseline gap-1.5">
+                {user?.displayed_streak ?? 0}
+                <span className="text-xs font-bold text-[#829BA8] uppercase">days</span>
+              </div>
+              <div className="text-[11px] font-bold text-[#829BA8] mt-1">
+                Offset: <span className="font-extrabold text-[#F1F7FB]">{settings?.debug_day_offset ?? user?.settings?.debug_day_offset ?? 0}d</span>
+              </div>
+            </div>
           </div>
-          <div>
-            <div className="text-2xl font-black text-[#FF4B4B]">
-              {user?.hearts ?? 5}{' '}
-              <span className="text-xs font-black text-[#829BA8]">/ 5</span>
-            </div>
-            <div className="text-[11px] text-[#829BA8] font-bold mt-1">
-              Lazy auto-regen
-            </div>
-          </div>
-        </div>
 
-        {/* Gems Card */}
-        <div
-          onClick={() => sfx.play('correct')}
-          className="p-4 rounded-2xl border-2 border-[#37464F] hover:border-[#1CB0F6] bg-[#131F24] hover:bg-[#202F36]/60 transition-all cursor-pointer group shadow-sm flex flex-col justify-between"
-        >
-          <div className="flex items-center justify-between mb-2">
-            <div className="w-10 h-10 rounded-xl bg-[#1CB0F6]/15 border-2 border-b-4 border-[#1CB0F6]/30 flex items-center justify-center group-hover:scale-110 transition-transform">
-              <GemIcon className="w-5 h-5" />
+          {/* Hearts Card */}
+          <div
+            onClick={() => sfx.play('tap')}
+            className="p-4 rounded-2xl bg-[#202F36] hover:bg-[#263842] border-2 border-[#37464F] hover:border-[#FF4B4B] transition-all cursor-pointer group flex flex-col justify-between"
+          >
+            <div className="flex items-center justify-between mb-3">
+              <div className="flex items-center gap-2">
+                <div className="group-hover:scale-110 transition-transform">
+                  <PracticeHeart3D className="w-6 h-6 drop-shadow" />
+                </div>
+                <span className="text-xs font-black uppercase text-[#FF4B4B] tracking-wider">
+                  Hearts
+                </span>
+              </div>
+              <span className={`text-[10px] font-black px-2 py-0.5 rounded-lg border ${
+                user?.hearts === 5 
+                  ? 'text-[#58CC02] bg-[#58CC02]/20 border-[#58CC02]/30' 
+                  : 'text-[#FF4B4B] bg-[#FF4B4B]/20 border-[#FF4B4B]/30'
+              }`}>
+                {user?.hearts === 5 ? 'FULL' : 'REGEN'}
+              </span>
             </div>
-            <span className="text-[10px] font-black text-[#1CB0F6] bg-[#1CB0F6]/15 px-2 py-0.5 rounded-full">
-              GEMS
-            </span>
+            <div>
+              <div className="text-2xl sm:text-3xl font-black text-[#FF4B4B] flex items-baseline gap-1">
+                {user?.hearts ?? 5}
+                <span className="text-xs font-bold text-[#829BA8]">/ 5</span>
+              </div>
+              <div className="text-[11px] font-bold text-[#829BA8] mt-1">
+                Lazy auto-regen
+              </div>
+            </div>
           </div>
-          <div>
-            <div className="text-2xl font-black text-[#1CB0F6]">
-              {user?.gems ?? 0}
-            </div>
-            <div className="text-[11px] text-[#829BA8] font-bold mt-1">
-              Store balance
-            </div>
-          </div>
-        </div>
 
-        {/* XP Card */}
-        <div
-          onClick={() => sfx.play('fanfare')}
-          className="p-4 rounded-2xl border-2 border-[#37464F] hover:border-[#FFC800] bg-[#131F24] hover:bg-[#202F36]/60 transition-all cursor-pointer group shadow-sm flex flex-col justify-between"
-        >
-          <div className="flex items-center justify-between mb-2">
-            <div className="w-10 h-10 rounded-xl bg-[#FFC800]/15 border-2 border-b-4 border-[#FFC800]/30 flex items-center justify-center group-hover:scale-110 transition-transform">
-              <PracticeStar3D className="w-5 h-5" />
+          {/* Gems Card */}
+          <div
+            onClick={() => sfx.play('correct')}
+            className="p-4 rounded-2xl bg-[#202F36] hover:bg-[#263842] border-2 border-[#37464F] hover:border-[#1CB0F6] transition-all cursor-pointer group flex flex-col justify-between"
+          >
+            <div className="flex items-center justify-between mb-3">
+              <div className="flex items-center gap-2">
+                <div className="group-hover:scale-110 transition-transform">
+                  <GemIcon className="w-6 h-6 drop-shadow" />
+                </div>
+                <span className="text-xs font-black uppercase text-[#1CB0F6] tracking-wider">
+                  Gems
+                </span>
+              </div>
+              <span className="text-[10px] font-black text-[#1CB0F6] bg-[#1CB0F6]/20 px-2 py-0.5 rounded-lg border border-[#1CB0F6]/30">
+                BANK
+              </span>
             </div>
-            <span className="text-[10px] font-black text-[#FFC800] bg-[#FFC800]/15 px-2 py-0.5 rounded-full">
-              TOTAL XP
-            </span>
+            <div>
+              <div className="text-2xl sm:text-3xl font-black text-[#1CB0F6]">
+                {user?.gems ?? 0}
+              </div>
+              <div className="text-[11px] font-bold text-[#829BA8] mt-1">
+                Store balance
+              </div>
+            </div>
           </div>
-          <div>
-            <div className="text-2xl font-black text-[#FFC800]">
-              {user?.total_xp ?? 0}{' '}
-              <span className="text-xs font-black text-[#829BA8]">XP</span>
+
+          {/* XP Card */}
+          <div
+            onClick={() => sfx.play('fanfare')}
+            className="p-4 rounded-2xl bg-[#202F36] hover:bg-[#263842] border-2 border-[#37464F] hover:border-[#FFC800] transition-all cursor-pointer group flex flex-col justify-between"
+          >
+            <div className="flex items-center justify-between mb-3">
+              <div className="flex items-center gap-2">
+                <div className="group-hover:scale-110 transition-transform">
+                  <PracticeStar3D className="w-6 h-6 drop-shadow" />
+                </div>
+                <span className="text-xs font-black uppercase text-[#FFC800] tracking-wider">
+                  Total XP
+                </span>
+              </div>
+              <span className="text-[10px] font-black text-[#FFC800] bg-[#FFC800]/20 px-2 py-0.5 rounded-lg border border-[#FFC800]/30">
+                LEAGUE
+              </span>
             </div>
-            <div className="text-[11px] text-[#829BA8] font-bold mt-1">
-              Sapphire league
+            <div>
+              <div className="text-2xl sm:text-3xl font-black text-[#FFC800] flex items-baseline gap-1.5">
+                {user?.total_xp ?? 0}
+                <span className="text-xs font-bold text-[#829BA8]">XP</span>
+              </div>
+              <div className="text-[11px] font-bold text-[#829BA8] mt-1">
+                Sapphire rank
+              </div>
             </div>
           </div>
         </div>
