@@ -11,6 +11,8 @@ import {
   GemIcon,
   PracticeStar3D,
 } from '@/components/icons';
+import { PracticeSpeed3D } from '@/components/icons/PracticeIcons';
+import { DuolingoGearIcon } from '@/components/icons/NavIcons';
 import { CharacterAvatar } from '@/components/mascot/CharacterAvatar';
 import { OwlMascot } from '@/components/mascot/OwlMascot';
 
@@ -243,48 +245,47 @@ export default function DevToolsPage() {
         </div>
       </div>
 
-      {/* 3. Section Filter Tabs (Duolingo Pill Tabs) */}
-      <div className="flex items-center gap-2 overflow-x-auto pb-1 scrollbar-none">
+      {/* 3. Section Filter Tabs (Clean Duolingo 3D Pill Tabs without Scrollbar) */}
+      <div className="flex flex-wrap items-center gap-2.5">
         {[
-          { id: 'time', label: 'Time Travel', icon: '⏰' },
-          { id: 'hearts', label: 'Hearts & Energy', icon: '❤️' },
-          { id: 'currency', label: 'Currencies & XP', icon: '💎' },
-          { id: 'course', label: 'Course & Reset', icon: '⚙️' },
-        ].map((tab) => (
-          <button
-            key={tab.id}
-            onClick={() => {
-              sfx.play('tap');
-              setActiveTab(tab.id as any);
-            }}
-            className={`px-4 py-2.5 rounded-2xl font-black text-xs uppercase tracking-wider whitespace-nowrap transition-all border-2 border-b-4 ${
-              activeTab === tab.id
-                ? 'bg-[#1CB0F6] border-[#1899D6] text-white'
-                : 'bg-[#131F24] border-[#37464F] text-[#829BA8] hover:text-[#F1F7FB] hover:border-[#52656F]'
-            }`}
-          >
-            <span className="mr-1.5">{tab.icon}</span>
-            {tab.label}
-          </button>
-        ))}
+          { id: 'time', label: 'Time Travel', icon: <PracticeSpeed3D className="w-5 h-5" /> },
+          { id: 'hearts', label: 'Hearts & Energy', icon: <PracticeHeart3D className="w-5 h-5" /> },
+          { id: 'currency', label: 'Currencies & XP', icon: <GemIcon className="w-5 h-5" /> },
+          { id: 'course', label: 'Course & Reset', icon: <DuolingoGearIcon className="w-5 h-5" /> },
+        ].map((tab) => {
+          const isActive = activeTab === tab.id;
+          return (
+            <button
+              key={tab.id}
+              onClick={() => {
+                sfx.play('tap');
+                setActiveTab(tab.id as any);
+              }}
+              className={`flex items-center gap-2 px-4 py-2.5 rounded-2xl font-black text-xs uppercase tracking-wider transition-all border-2 border-b-4 active:translate-y-0.5 ${
+                isActive
+                  ? 'bg-[#1CB0F6] border-[#1899D6] text-white shadow-sm'
+                  : 'bg-[#202F36] border-[#37464F] text-[#829BA8] hover:text-[#F1F7FB] hover:border-[#52656F]'
+              }`}
+            >
+              <span className="shrink-0">{tab.icon}</span>
+              <span>{tab.label}</span>
+            </button>
+          );
+        })}
       </div>
 
-      {/* 4. Duolingo-Styled Control Cards */}
+      {/* 4. Seamless Duolingo-Styled Control Cards (No Bulky Background Boxes) */}
       <div className="space-y-4">
         {/* Time Travel Section */}
         {(activeTab === 'time' || activeTab === undefined) && (
           <div className="bg-[#131F24] border-2 border-[#37464F] rounded-3xl p-6 shadow-md space-y-4 animate-in fade-in duration-200">
-            <div className="flex items-center justify-between">
-              <div className="flex items-center gap-3">
-                <div className="w-12 h-12 rounded-2xl bg-[#1CB0F6]/15 border-2 border-b-4 border-[#1CB0F6]/30 flex items-center justify-center text-xl">
-                  ⏰
-                </div>
-                <div>
-                  <h2 className="text-lg font-black text-[#F1F7FB]">Simulate Virtual Clock</h2>
-                  <p className="text-xs font-bold text-[#829BA8]">
-                    Advance days to test streak freezes, missed days, and weekly league rollovers.
-                  </p>
-                </div>
+            <div className="flex items-center gap-3">
+              <PracticeSpeed3D className="w-10 h-10 shrink-0 drop-shadow" />
+              <div>
+                <h2 className="text-lg font-black text-[#F1F7FB]">Simulate Virtual Clock</h2>
+                <p className="text-xs font-bold text-[#829BA8]">
+                  Advance days to test streak freezes, missed days, and weekly league rollovers.
+                </p>
               </div>
             </div>
 
@@ -336,9 +337,7 @@ export default function DevToolsPage() {
         {(activeTab === 'hearts' || activeTab === undefined) && (
           <div className="bg-[#131F24] border-2 border-[#37464F] rounded-3xl p-6 shadow-md space-y-4 animate-in fade-in duration-200">
             <div className="flex items-center gap-3">
-              <div className="w-12 h-12 rounded-2xl bg-[#FF4B4B]/15 border-2 border-b-4 border-[#FF4B4B]/30 flex items-center justify-center text-xl">
-                ❤️
-              </div>
+              <PracticeHeart3D className="w-10 h-10 shrink-0 drop-shadow" />
               <div>
                 <h2 className="text-lg font-black text-[#F1F7FB]">Hearts Sandbox</h2>
                 <p className="text-xs font-bold text-[#829BA8]">
@@ -395,9 +394,7 @@ export default function DevToolsPage() {
         {(activeTab === 'currency' || activeTab === undefined) && (
           <div className="bg-[#131F24] border-2 border-[#37464F] rounded-3xl p-6 shadow-md space-y-4 animate-in fade-in duration-200">
             <div className="flex items-center gap-3">
-              <div className="w-12 h-12 rounded-2xl bg-[#FFC800]/15 border-2 border-b-4 border-[#FFC800]/30 flex items-center justify-center text-xl">
-                💎
-              </div>
+              <GemIcon className="w-10 h-10 shrink-0 drop-shadow" />
               <div>
                 <h2 className="text-lg font-black text-[#F1F7FB]">Currencies & XP Progression</h2>
                 <p className="text-xs font-bold text-[#829BA8]">
@@ -454,9 +451,7 @@ export default function DevToolsPage() {
         {(activeTab === 'course' || activeTab === undefined) && (
           <div className="bg-[#131F24] border-2 border-[#37464F] rounded-3xl p-6 shadow-md space-y-4 animate-in fade-in duration-200">
             <div className="flex items-center gap-3">
-              <div className="w-12 h-12 rounded-2xl bg-[#CE82FF]/15 border-2 border-b-4 border-[#CE82FF]/30 flex items-center justify-center text-xl">
-                ⚙️
-              </div>
+              <DuolingoGearIcon className="w-10 h-10 shrink-0 drop-shadow" />
               <div>
                 <h2 className="text-lg font-black text-[#F1F7FB]">Curriculum & Database Reset</h2>
                 <p className="text-xs font-bold text-[#829BA8]">
