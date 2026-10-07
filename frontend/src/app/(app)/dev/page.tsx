@@ -489,21 +489,8 @@ export default function DevToolsPage() {
         )}
       </div>
 
-      {/* 5. Character Squad Showcase */}
-      <div className="p-6 rounded-3xl border-2 border-[#37464F] bg-[#131F24] shadow-sm flex items-center justify-between">
-        <div className="flex items-center gap-3">
-          <span className="text-xs font-black uppercase text-[#829BA8] tracking-widest">
-            Learning Pals
-          </span>
-        </div>
-        <div className="flex items-center -space-x-2">
-          <CharacterAvatar character="duo" mood="happy" size="sm" className="border-2 border-[#131F24] rounded-full" />
-          <CharacterAvatar character="lily" mood="happy" size="sm" className="border-2 border-[#131F24] rounded-full" />
-          <CharacterAvatar character="bea" mood="happy" size="sm" className="border-2 border-[#131F24] rounded-full" />
-          <CharacterAvatar character="junior" mood="happy" size="sm" className="border-2 border-[#131F24] rounded-full" />
-        </div>
-      </div>
     </div>
   );
 }
+
 
