@@ -17,7 +17,7 @@
 - **GitHub Repository:** [https://github.com/PYB05/duolingo-clone](https://github.com/PYB05/duolingo-clone)
 - **Backend API (Render):** [https://duolingo-clone-qgst.onrender.com](https://duolingo-clone-qgst.onrender.com)
 - **Interactive API Documentation (Swagger / OpenAPI):** [https://duolingo-clone-qgst.onrender.com/docs](https://duolingo-clone-qgst.onrender.com/docs)
-- **Frontend Web Application (Vercel):** Deployed via Vercel connecting directly to the live backend API.
+- **Frontend Web Application (Vercel):** [https://duolingo-clone-six-coral.vercel.app](https://duolingo-clone-six-coral.vercel.app/)
 
 ---
 
