@@ -84,11 +84,11 @@ Key highlights include:
 ```mermaid
 flowchart TD
     subgraph Frontend ["Frontend (Next.js 14 App Router)"]
-        UI[UI Components & Pages]
-        Store[Zustand Lesson Store]
-        Query[TanStack Query Cache]
-        APIClient[Typed API Client (lib/api.ts)]
-        Audio[Web Audio & TTS Engine]
+        UI["UI Components & Pages"]
+        Store["Zustand Lesson Store"]
+        Query["TanStack Query Cache"]
+        APIClient["Typed API Client (lib/api.ts)"]
+        Audio["Web Audio & TTS Engine"]
         
         UI --> Store
         UI --> Query
@@ -98,13 +98,13 @@ flowchart TD
     end
 
     subgraph Backend ["Backend (FastAPI Layered Architecture)"]
-        Router[API Routers (routers/)]
-        Service[Business Logic Services (services/)]
-        Clock[Virtual Clock (core/clock.py)]
-        Checker[Answer Checker (services/answer_checker.py)]
-        Models[SQLAlchemy 2.0 Models (models/)]
+        Router["API Routers (routers/)"]
+        Service["Business Logic Services (services/)"]
+        Clock["Virtual Clock (core/clock.py)"]
+        Checker["Answer Checker (services/answer_checker.py)"]
+        Models["SQLAlchemy 2.0 Models (models/)"]
         
-        APIClient -- "HTTP JSON /api/v1" --> Router
+        APIClient -->|"HTTP JSON /api/v1"| Router
         Router --> Service
         Service --> Clock
         Service --> Checker
@@ -112,7 +112,7 @@ flowchart TD
     end
 
     subgraph Storage ["Database (SQLite 3 WAL Mode)"]
-        DB[(data/app.db)]
+        DB[("SQLite Database data/app.db")]
         Models --> DB
     end
 ```
@@ -247,31 +247,37 @@ To balance high read performance with strict transactional auditing:
 ### 2. Lazy Hearts Regeneration ($O(1)$)
 Rather than executing resource-intensive server-side background cron jobs to periodically increment hearts:
 1. When any heart-dependent endpoint is invoked, the server computes elapsed time:
-   $$\Delta t = \text{now} - \text{hearts\_updated\_at}$$
+   ```python
+   elapsed_seconds = (now - hearts_updated_at).total_seconds()
+   ```
 2. The number of hearts gained is calculated mathematically:
-   $$\text{gained} = \left\lfloor \frac{\Delta t}{\text{HEART\_REGEN\_SECONDS}} \right\rfloor$$
-3. Hearts are updated:
-   $$\text{hearts} = \min(5, \text{hearts} + \text{gained})$$
-4. The timestamp is advanced by $\text{gained} \times \text{interval}$. If hearts reach 5, the timestamp resets to $\text{now}$.
+   ```python
+   hearts_gained = math.floor(elapsed_seconds / HEART_REGEN_SECONDS)
+   ```
+3. Hearts balance is updated:
+   ```python
+   hearts = min(5, hearts + hearts_gained)
+   ```
+4. The timestamp is advanced by `hearts_gained * HEART_REGEN_SECONDS`. If hearts reach 5, the timestamp resets to `now`.
 5. The API response returns `next_heart_in_seconds` to drive the client's live countdown timer.
 
 ### 3. Streak Engine & "Displayed Streak 0" Rule
-- Completing any XP-earning activity on date $T$:
-  - If last activity was on date $T$: Streak remains unchanged.
-  - If last activity was on date $T - 1$: Streak increments by $+1$.
-  - If last activity was on date $T - 2$ and the learner owns a **Streak Freeze**: One freeze is consumed, a retroactive freeze record is created for date $T - 1$, and the streak increments by $+1$.
-  - Otherwise: Streak resets to $1$.
-- **Displayed Streak 0 Rule:** If a learner launches the app on date $T$, and their last activity was before $T - 1$ without freeze coverage, their flame icon turns grey and displays $0$. Completing a lesson on date $T$ resets the active streak to $1$.
+- Completing any XP-earning activity on date `T`:
+  - If last activity was on date `T`: Streak remains unchanged.
+  - If last activity was on date `T - 1`: Streak increments by `+1`.
+  - If last activity was on date `T - 2` and the learner owns a **Streak Freeze**: One freeze is consumed, a retroactive freeze record is created for date `T - 1`, and the streak increments by `+1`.
+  - Otherwise: Streak resets to `1`.
+- **Displayed Streak 0 Rule:** If a learner launches the app on date `T`, and their last activity was before `T - 1` without freeze coverage, their flame icon turns grey and displays `0`. Completing a lesson on date `T` resets the active streak to `1`.
 
 ### 4. 10-Tier Bot League Simulation
 - Leagues span 10 tiers: **Bronze, Silver, Gold, Sapphire, Ruby, Emerald, Amethyst, Pearl, Obsidian, and Diamond**.
-- Each group consists of 30 members ($1$ human learner $+ 29$ simulated bots).
-- Each bot possesses a distinct personality profile generating $15$–$120$ XP/day with deterministic pseudo-random jitter.
+- Each group consists of 30 members (1 human learner + 29 simulated bots).
+- Each bot possesses a distinct personality profile generating 15–120 XP/day with deterministic pseudo-random jitter.
 - Standings are computed dynamically on query without long-running background timers.
 - **Weekly Rollover:** Evaluated lazily on the first request following the conclusion of the week:
-  - **Ranks 1–10:** Promoted to the next tier ($\Delta \text{tier} = +1$).
+  - **Ranks 1–10:** Promoted to the next tier (+1 tier).
   - **Ranks 11–25:** Retained in the current tier.
-  - **Ranks 26–30:** Demoted to the previous tier ($\Delta \text{tier} = -1$, clamped at Bronze).
+  - **Ranks 26–30:** Demoted to the previous tier (-1 tier, clamped at Bronze).
 
 ---
 
