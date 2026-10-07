@@ -142,14 +142,14 @@ export default function DevToolsPage() {
       )}
 
       {/* 2. Unified Duolingo Stats Bar Section */}
-      <div className="bg-[#131F24] border-2 border-[#37464F] rounded-3xl p-4 sm:p-5 shadow-lg">
-        <div className="flex items-center justify-between mb-3 px-1">
-          <span className="text-[11px] font-black uppercase text-[#829BA8] tracking-widest flex items-center gap-1.5">
+      <div className="bg-[#131F24] border-2 border-[#37464F] rounded-3xl p-5 sm:p-6 shadow-lg">
+        <div className="flex items-center justify-between mb-4">
+          <span className="text-xs font-black uppercase text-[#829BA8] tracking-widest flex items-center gap-2">
             <span className="w-2 h-2 rounded-full bg-[#58CC02] animate-pulse" />
-            LIVE ACCOUNT METRICS
+            LIVE METRICS
           </span>
-          <span className="text-[11px] font-bold text-[#52656F]">
-            Click any metric to test sound
+          <span className="text-[11px] font-bold text-[#52656F] hidden sm:block">
+            Click any card to play sound
           </span>
         </div>
 
@@ -157,26 +157,19 @@ export default function DevToolsPage() {
           {/* Streak Card */}
           <div
             onClick={() => sfx.play('streak')}
-            className="p-4 rounded-2xl bg-[#202F36] hover:bg-[#263842] border-2 border-[#37464F] hover:border-[#FF9600] transition-all cursor-pointer group flex flex-col justify-between"
+            className="p-4 rounded-2xl bg-[#202F36] hover:bg-[#263842] border-2 border-b-4 border-[#37464F] hover:border-[#FF9600] active:translate-y-0.5 transition-all cursor-pointer group flex flex-col justify-between"
           >
-            <div className="flex items-center justify-between mb-3">
-              <div className="flex items-center gap-2">
-                <FlameIcon className="w-6 h-6 text-[#FF9600] group-hover:scale-110 transition-transform drop-shadow" active />
-                <span className="text-xs font-black uppercase text-[#FF9600] tracking-wider">
-                  Streak
-                </span>
+            <div className="flex items-center gap-2.5 mb-2">
+              <FlameIcon className="w-7 h-7 text-[#FF9600] group-hover:scale-110 transition-transform shrink-0 drop-shadow" active />
+              <div className="min-w-0">
+                <div className="text-[11px] font-black uppercase text-[#FF9600] tracking-wider truncate">Streak</div>
+                <div className="text-[10px] font-extrabold text-[#829BA8] truncate">{settings?.debug_day_offset ?? 0}d offset</div>
               </div>
-              <span className="text-[10px] font-black text-[#FF9600] bg-[#FF9600]/20 px-2 py-0.5 rounded-lg border border-[#FF9600]/30">
-                ACTIVE
-              </span>
             </div>
-            <div>
-              <div className="text-2xl sm:text-3xl font-black text-[#F1F7FB] flex items-baseline gap-1.5">
+            <div className="pt-2 border-t border-[#37464F]/60">
+              <div className="text-2xl sm:text-3xl font-black text-[#F1F7FB] leading-none">
                 {user?.displayed_streak ?? 0}
-                <span className="text-xs font-bold text-[#829BA8] uppercase">days</span>
-              </div>
-              <div className="text-[11px] font-bold text-[#829BA8] mt-1">
-                Offset: <span className="font-extrabold text-[#F1F7FB]">{settings?.debug_day_offset ?? user?.settings?.debug_day_offset ?? 0}d</span>
+                <span className="text-xs font-bold text-[#829BA8] ml-1 uppercase">days</span>
               </div>
             </div>
           </div>
@@ -184,32 +177,23 @@ export default function DevToolsPage() {
           {/* Hearts Card */}
           <div
             onClick={() => sfx.play('tap')}
-            className="p-4 rounded-2xl bg-[#202F36] hover:bg-[#263842] border-2 border-[#37464F] hover:border-[#FF4B4B] transition-all cursor-pointer group flex flex-col justify-between"
+            className="p-4 rounded-2xl bg-[#202F36] hover:bg-[#263842] border-2 border-b-4 border-[#37464F] hover:border-[#FF4B4B] active:translate-y-0.5 transition-all cursor-pointer group flex flex-col justify-between"
           >
-            <div className="flex items-center justify-between mb-3">
-              <div className="flex items-center gap-2">
-                <div className="group-hover:scale-110 transition-transform">
-                  <PracticeHeart3D className="w-6 h-6 drop-shadow" />
+            <div className="flex items-center gap-2.5 mb-2">
+              <div className="group-hover:scale-110 transition-transform shrink-0">
+                <PracticeHeart3D className="w-7 h-7 drop-shadow" />
+              </div>
+              <div className="min-w-0">
+                <div className="text-[11px] font-black uppercase text-[#FF4B4B] tracking-wider truncate">Hearts</div>
+                <div className="text-[10px] font-extrabold text-[#829BA8] truncate">
+                  {user?.hearts === 5 ? 'Max full' : 'Regenerating'}
                 </div>
-                <span className="text-xs font-black uppercase text-[#FF4B4B] tracking-wider">
-                  Hearts
-                </span>
               </div>
-              <span className={`text-[10px] font-black px-2 py-0.5 rounded-lg border ${
-                user?.hearts === 5 
-                  ? 'text-[#58CC02] bg-[#58CC02]/20 border-[#58CC02]/30' 
-                  : 'text-[#FF4B4B] bg-[#FF4B4B]/20 border-[#FF4B4B]/30'
-              }`}>
-                {user?.hearts === 5 ? 'FULL' : 'REGEN'}
-              </span>
             </div>
-            <div>
-              <div className="text-2xl sm:text-3xl font-black text-[#FF4B4B] flex items-baseline gap-1">
+            <div className="pt-2 border-t border-[#37464F]/60">
+              <div className="text-2xl sm:text-3xl font-black text-[#FF4B4B] leading-none">
                 {user?.hearts ?? 5}
-                <span className="text-xs font-bold text-[#829BA8]">/ 5</span>
-              </div>
-              <div className="text-[11px] font-bold text-[#829BA8] mt-1">
-                Lazy auto-regen
+                <span className="text-xs font-bold text-[#829BA8] ml-1">/ 5</span>
               </div>
             </div>
           </div>
@@ -217,27 +201,20 @@ export default function DevToolsPage() {
           {/* Gems Card */}
           <div
             onClick={() => sfx.play('correct')}
-            className="p-4 rounded-2xl bg-[#202F36] hover:bg-[#263842] border-2 border-[#37464F] hover:border-[#1CB0F6] transition-all cursor-pointer group flex flex-col justify-between"
+            className="p-4 rounded-2xl bg-[#202F36] hover:bg-[#263842] border-2 border-b-4 border-[#37464F] hover:border-[#1CB0F6] active:translate-y-0.5 transition-all cursor-pointer group flex flex-col justify-between"
           >
-            <div className="flex items-center justify-between mb-3">
-              <div className="flex items-center gap-2">
-                <div className="group-hover:scale-110 transition-transform">
-                  <GemIcon className="w-6 h-6 drop-shadow" />
-                </div>
-                <span className="text-xs font-black uppercase text-[#1CB0F6] tracking-wider">
-                  Gems
-                </span>
+            <div className="flex items-center gap-2.5 mb-2">
+              <div className="group-hover:scale-110 transition-transform shrink-0">
+                <GemIcon className="w-7 h-7 drop-shadow" />
               </div>
-              <span className="text-[10px] font-black text-[#1CB0F6] bg-[#1CB0F6]/20 px-2 py-0.5 rounded-lg border border-[#1CB0F6]/30">
-                BANK
-              </span>
+              <div className="min-w-0">
+                <div className="text-[11px] font-black uppercase text-[#1CB0F6] tracking-wider truncate">Gems</div>
+                <div className="text-[10px] font-extrabold text-[#829BA8] truncate">In wallet</div>
+              </div>
             </div>
-            <div>
-              <div className="text-2xl sm:text-3xl font-black text-[#1CB0F6]">
+            <div className="pt-2 border-t border-[#37464F]/60">
+              <div className="text-2xl sm:text-3xl font-black text-[#1CB0F6] leading-none">
                 {user?.gems ?? 0}
-              </div>
-              <div className="text-[11px] font-bold text-[#829BA8] mt-1">
-                Store balance
               </div>
             </div>
           </div>
@@ -245,28 +222,21 @@ export default function DevToolsPage() {
           {/* XP Card */}
           <div
             onClick={() => sfx.play('fanfare')}
-            className="p-4 rounded-2xl bg-[#202F36] hover:bg-[#263842] border-2 border-[#37464F] hover:border-[#FFC800] transition-all cursor-pointer group flex flex-col justify-between"
+            className="p-4 rounded-2xl bg-[#202F36] hover:bg-[#263842] border-2 border-b-4 border-[#37464F] hover:border-[#FFC800] active:translate-y-0.5 transition-all cursor-pointer group flex flex-col justify-between"
           >
-            <div className="flex items-center justify-between mb-3">
-              <div className="flex items-center gap-2">
-                <div className="group-hover:scale-110 transition-transform">
-                  <PracticeStar3D className="w-6 h-6 drop-shadow" />
-                </div>
-                <span className="text-xs font-black uppercase text-[#FFC800] tracking-wider">
-                  Total XP
-                </span>
+            <div className="flex items-center gap-2.5 mb-2">
+              <div className="group-hover:scale-110 transition-transform shrink-0">
+                <PracticeStar3D className="w-7 h-7 drop-shadow" />
               </div>
-              <span className="text-[10px] font-black text-[#FFC800] bg-[#FFC800]/20 px-2 py-0.5 rounded-lg border border-[#FFC800]/30">
-                LEAGUE
-              </span>
+              <div className="min-w-0">
+                <div className="text-[11px] font-black uppercase text-[#FFC800] tracking-wider truncate">Total XP</div>
+                <div className="text-[10px] font-extrabold text-[#829BA8] truncate">Sapphire</div>
+              </div>
             </div>
-            <div>
-              <div className="text-2xl sm:text-3xl font-black text-[#FFC800] flex items-baseline gap-1.5">
+            <div className="pt-2 border-t border-[#37464F]/60">
+              <div className="text-2xl sm:text-3xl font-black text-[#FFC800] leading-none">
                 {user?.total_xp ?? 0}
-                <span className="text-xs font-bold text-[#829BA8]">XP</span>
-              </div>
-              <div className="text-[11px] font-bold text-[#829BA8] mt-1">
-                Sapphire rank
+                <span className="text-xs font-bold text-[#829BA8] ml-1">XP</span>
               </div>
             </div>
           </div>
